@@ -1,0 +1,557 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>TMS SIER - UI Audit Prototype</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+    <script defer src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <script defer src="app.js"></script>
+  </head>
+  <body class="logged-out">
+    <section class="login-screen" id="loginScreen">
+      <div class="login-panel">
+        <div class="login-stack">
+          <div class="login-brand">
+            <img src="assets/logo-tms-sier-full.png" alt="SIER TMS" />
+          </div>
+          <form class="login-form" id="loginForm">
+            <div>
+              <h1>Login</h1>
+            </div>
+            <label for="loginEmail">Email</label>
+            <div class="login-control">
+              <i data-lucide="mail"></i>
+              <input id="loginEmail" type="email" value="admin@sier.co.id" autocomplete="username" />
+            </div>
+            <label for="loginPassword">Password</label>
+            <div class="login-control">
+              <i data-lucide="lock-keyhole"></i>
+              <input id="loginPassword" type="password" value="admin123" autocomplete="current-password" />
+            </div>
+            <div class="login-options">
+              <label><input type="checkbox" checked /> Ingat saya</label>
+              <button type="button">Lupa password?</button>
+            </div>
+            <button class="btn login-submit" type="submit"><i data-lucide="log-in"></i>Masuk</button>
+          </form>
+        </div>
+      </div>
+      <div class="login-hero" aria-hidden="true">
+        <div class="login-hero-copy">
+          <span>SURABAYA INDUSTRIAL ESTATE RUNGKUT</span>
+          <strong>Manajemen Pengelolaan Tenant Kawasan Industri</strong>
+        </div>
+        <div class="login-map-overlay">
+          <svg class="map-web" viewBox="0 0 760 520" fill="none" aria-hidden="true">
+            <path d="M84 344L208 268L338 306L458 210L598 126L690 244L620 390L448 426L310 392L174 438L84 344Z" />
+            <path d="M208 268L174 438M208 268L458 210M338 306L598 126M338 306L448 426M458 210L690 244M598 126L620 390M310 392L458 210M174 438L448 426M120 166L208 268M120 166L318 126M318 126L458 210M458 210L552 74M552 74L598 126M690 244L720 94M690 244L720 338M448 426L552 468M310 392L230 488" />
+          </svg>
+          <span class="map-node node-a"><i data-lucide="factory"></i></span>
+          <span class="map-node node-b"><i data-lucide="building-2"></i></span>
+          <span class="map-node node-c"><i data-lucide="warehouse"></i></span>
+          <span class="map-node node-d"><i data-lucide="users"></i></span>
+          <span class="map-node node-e"><i data-lucide="boxes"></i></span>
+          <span class="map-node node-f"><i data-lucide="file-text"></i></span>
+          <span class="map-node node-g"><i data-lucide="wallet-cards"></i></span>
+          <span class="map-node node-h"><i data-lucide="map-pin"></i></span>
+          <span class="map-node node-i"><i data-lucide="bar-chart-3"></i></span>
+          <span class="map-node node-j subtle"><i data-lucide="landmark"></i></span>
+          <span class="map-node node-k subtle"><i data-lucide="scan-line"></i></span>
+          <span class="map-node node-l subtle"><i data-lucide="shield-check"></i></span>
+          <span class="map-node node-m subtle"><i data-lucide="receipt-text"></i></span>
+          <span class="map-node node-n subtle"><i data-lucide="network"></i></span>
+        </div>
+        <img class="login-hero-image" src="assets/hero-industrial-estate-final.png" alt="" />
+      </div>
+    </section>
+    <aside class="sidebar">
+      <div class="brand">
+        <img class="brand-mark" src="assets/logo-tms-sier.png" alt="TMS SIER" />
+        <div>
+          <strong>SIER TMS</strong>
+          <span>Tenant Management System</span>
+        </div>
+      </div>
+      <nav id="nav" class="nav"></nav>
+      <footer>PT Surabaya Industrial Estate Rungkut © 2026</footer>
+    </aside>
+
+    <main class="shell">
+      <header class="topbar">
+        <button class="icon-button mobile-menu" id="mobileMenu" aria-label="Buka menu">
+          <i data-lucide="menu"></i>
+        </button>
+        <div class="global-search top-search">
+          <i data-lucide="search"></i>
+          <input placeholder="Cari data tenant, utilitas, laporan..." />
+        </div>
+        <div class="top-actions">
+          <div class="notification-menu">
+            <button class="icon-button has-badge" id="notificationButton" aria-label="Notifikasi" aria-expanded="false">
+              <i data-lucide="bell"></i>
+              <span>3</span>
+            </button>
+            <div class="notification-dropdown" id="notificationDropdown">
+              <div class="notification-head">
+                <b>Notifikasi</b>
+                <small>3 baru</small>
+              </div>
+              <button class="notification-item unread">
+                <span class="notification-dot"></span>
+                <div>
+                  <b>Kontrak segera berakhir</b>
+                  <small>2 tenant butuh tindak lanjut bulan ini</small>
+                </div>
+              </button>
+              <button class="notification-item unread">
+                <span class="notification-dot"></span>
+                <div>
+                  <b>Tagihan jatuh tempo</b>
+                  <small>Invoice sewa lahan menunggu validasi</small>
+                </div>
+              </button>
+              <button class="notification-item">
+                <span class="notification-dot muted"></span>
+                <div>
+                  <b>Data tenant diperbarui</b>
+                  <small>Sinkronisasi terakhir berhasil</small>
+                </div>
+              </button>
+            </div>
+          </div>
+          <div class="user-menu">
+            <button class="user-box" id="userMenuButton" aria-label="Profil pengguna" aria-expanded="false">
+              <img class="avatar" src="assets/user-avatar.png" alt="Foto profil Admin" />
+              <span>
+                <b>Admin</b>
+                <small>SIER Super Admin</small>
+              </span>
+              <i data-lucide="chevron-down"></i>
+            </button>
+            <div class="user-dropdown" id="userDropdown">
+              <div class="user-bio">
+                <img class="avatar large" src="assets/user-avatar.png" alt="Foto profil Admin" />
+                <div>
+                  <b>Admin</b>
+                  <small>SIER Super Admin</small>
+                  <p>admin@sier.co.id</p>
+                </div>
+              </div>
+              <button class="dropdown-item profile-edit"><i data-lucide="user-round"></i>Profil Saya</button>
+              <button class="dropdown-item danger" id="logoutButton"><i data-lucide="log-out"></i>Logout</button>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <section id="page" class="page"></section>
+    </main>
+    <div class="modal-backdrop" id="updateContractModal" aria-hidden="true">
+      <div class="modal" role="dialog" aria-modal="true" aria-labelledby="updateContractTitle">
+        <button class="modal-close" id="closeUpdateContract" aria-label="Tutup">
+          <i data-lucide="x"></i>
+        </button>
+        <h2 id="updateContractTitle">Update Periode Akhir</h2>
+        <label for="newEndPeriod">Periode Akhir Baru</label>
+        <input class="input" id="newEndPeriod" type="date" />
+        <div class="modal-actions">
+          <button class="btn" id="saveUpdateContract">Simpan</button>
+        </div>
+      </div>
+    </div>
+    <div class="modal-backdrop" id="quickEditModal" aria-hidden="true">
+      <div class="modal" role="dialog" aria-modal="true" aria-labelledby="quickEditTitle">
+        <button class="modal-close" id="closeQuickEdit" aria-label="Tutup">
+          <i data-lucide="x"></i>
+        </button>
+        <h2 id="quickEditTitle">Edit Data</h2>
+        <div class="tenant-form">
+          <div class="form-field wide">
+            <label>Nama / Keterangan</label>
+            <input class="input" id="quickEditName" placeholder="Masukkan perubahan..." />
+          </div>
+          <div class="form-field">
+            <label>Status</label>
+            <div id="quickEditStatus"></div>
+          </div>
+        </div>
+        <div class="modal-actions">
+          <button class="btn" id="saveQuickEdit">Simpan Perubahan</button>
+        </div>
+      </div>
+    </div>
+    <div class="modal-backdrop" id="jenisUsahaModal" aria-hidden="true">
+      <div class="modal form-modal" role="dialog" aria-modal="true" aria-labelledby="jenisUsahaTitle">
+        <button class="modal-close" id="closeJenisUsaha" aria-label="Tutup">
+          <i data-lucide="x"></i>
+        </button>
+        <h2 id="jenisUsahaTitle">Tambah Jenis Usaha</h2>
+        <div class="tenant-form">
+          <div class="form-field">
+            <label>Kode Jenis Usaha <span class="required">*</span></label>
+            <input class="input" id="jenisUsahaKode" placeholder="Contoh: 001" />
+          </div>
+          <div class="form-field">
+            <label>Nama Jenis Usaha <span class="required">*</span></label>
+            <input class="input" id="jenisUsahaNama" placeholder="Contoh: Logistik" />
+          </div>
+          <div class="form-field">
+            <label>Status <span class="required">*</span></label>
+            <div id="jenisUsahaStatus"></div>
+          </div>
+        </div>
+        <div class="modal-actions">
+          <button class="btn" id="saveJenisUsaha"><i data-lucide="save"></i>Simpan</button>
+        </div>
+      </div>
+    </div>
+    <div class="modal-backdrop" id="tagihanModal" aria-hidden="true">
+      <div class="modal form-modal" role="dialog" aria-modal="true" aria-labelledby="tagihanTitle">
+        <button class="modal-close" id="closeTagihan" aria-label="Tutup">
+          <i data-lucide="x"></i>
+        </button>
+        <h2 id="tagihanTitle">Tambah Data</h2>
+        <div class="tenant-form">
+          <div class="form-field wide">
+            <label>Tanggal Penagihan Sewa <span class="required">*</span></label>
+            <input class="input" type="date" />
+          </div>
+          <div class="form-field wide">
+            <label>Keterangan <span class="required">*</span></label>
+            <input class="input" placeholder="Keterangan..." />
+          </div>
+          <div class="form-field wide">
+            <label>Jenis Tagihan <span class="required">*</span></label>
+            <div class="search-select" data-value="Select value">
+              <button type="button" class="search-select-trigger"><span>Select value</span><i data-lucide="chevron-down"></i></button>
+              <div class="search-select-menu">
+                <input class="input search-select-input" aria-label="Cari jenis tagihan" />
+                <div class="search-select-options">
+                  <button type="button" class="search-select-option">Sewa Lahan</button>
+                  <button type="button" class="search-select-option">Service Charge</button>
+                  <button type="button" class="search-select-option">Utilitas</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-field wide">
+            <label>Nilai Tagihan <span class="required">*</span></label>
+            <input class="input" placeholder="Nilai Tagihan..." />
+          </div>
+          <div class="form-field">
+            <label>PPN <span class="required">*</span></label>
+            <div class="search-select" data-value="Select value">
+              <button type="button" class="search-select-trigger"><span>Select value</span><i data-lucide="chevron-down"></i></button>
+              <div class="search-select-menu">
+                <input class="input search-select-input" aria-label="Cari PPN" />
+                <div class="search-select-options">
+                  <button type="button" class="search-select-option">PPN 11%</button>
+                  <button type="button" class="search-select-option">Non PPN</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-field">
+            <label>PPH <span class="required">*</span></label>
+            <div class="search-select" data-value="Select value">
+              <button type="button" class="search-select-trigger"><span>Select value</span><i data-lucide="chevron-down"></i></button>
+              <div class="search-select-menu">
+                <input class="input search-select-input" aria-label="Cari PPH" />
+                <div class="search-select-options">
+                  <button type="button" class="search-select-option">PPh 23</button>
+                  <button type="button" class="search-select-option">Non PPH</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-actions">
+          <button class="btn" id="saveTagihan"><i data-lucide="save"></i>Save</button>
+        </div>
+      </div>
+    </div>
+    <div class="modal-backdrop" id="customerModal" aria-hidden="true">
+      <div class="modal form-modal" role="dialog" aria-modal="true" aria-labelledby="customerTitle">
+        <button class="modal-close" id="closeCustomer" aria-label="Tutup">
+          <i data-lucide="x"></i>
+        </button>
+        <h2 id="customerTitle">Tambah Data</h2>
+        <div class="tenant-form">
+          <div class="form-field wide">
+            <label>Kode Tenant <span class="required">*</span></label>
+            <div class="search-select" data-value="Select value">
+              <button type="button" class="search-select-trigger"><span>Select value</span><i data-lucide="chevron-down"></i></button>
+              <div class="search-select-menu">
+                <input class="input search-select-input" aria-label="Cari tenant" />
+                <div class="search-select-options">
+                  <button type="button" class="search-select-option">TNT-001 - SIER PUSPA UTAMA PT</button>
+                  <button type="button" class="search-select-option">TNT-009 - BANK MANDIRI PT</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-field wide">
+            <label>Nama (Kontak Person) <span class="required">*</span></label>
+            <input class="input" placeholder="Nama (Kontak Person)" />
+          </div>
+          <div class="form-field wide">
+            <label>Jabatan <span class="required">*</span></label>
+            <input class="input" placeholder="jabatan" />
+          </div>
+          <div class="form-field wide">
+            <label>email <span class="required">*</span></label>
+            <input class="input" placeholder="email" />
+          </div>
+          <div class="form-field wide">
+            <label>No.Telp <span class="required">*</span></label>
+            <input class="input" placeholder="tlp" />
+          </div>
+          <div class="form-field wide">
+            <label>Dasar Penagihan <span class="required">*</span></label>
+            <input class="input" placeholder="ket_penagihan" />
+          </div>
+        </div>
+        <div class="modal-actions">
+          <button class="btn" id="saveCustomer"><i data-lucide="save"></i>Save</button>
+        </div>
+      </div>
+    </div>
+    <div class="modal-backdrop" id="rekeningModal" aria-hidden="true">
+      <div class="modal form-modal" role="dialog" aria-modal="true" aria-labelledby="rekeningTitle">
+        <button class="modal-close" id="closeRekening" aria-label="Tutup">
+          <i data-lucide="x"></i>
+        </button>
+        <h2 id="rekeningTitle">Tambah Data</h2>
+        <div class="tenant-form">
+          <div class="form-field wide">
+            <label>Kode Kawasan <span class="required">*</span></label>
+            <div class="search-select" data-value="Select value">
+              <button type="button" class="search-select-trigger"><span>Select value</span><i data-lucide="chevron-down"></i></button>
+              <div class="search-select-menu">
+                <input class="input search-select-input" aria-label="Cari kawasan" />
+                <div class="search-select-options">
+                  <button type="button" class="search-select-option">PT Surabaya Industrial Estate Rungkut</button>
+                  <button type="button" class="search-select-option">PIER Pasuruan</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-field wide">
+            <label>Nama Bank <span class="required">*</span></label>
+            <input class="input" placeholder="Nama Bank" />
+          </div>
+          <div class="form-field wide">
+            <label>No Rekening <span class="required">*</span></label>
+            <input class="input" placeholder="No rekening" />
+          </div>
+          <div class="form-field wide">
+            <label>Nama Rekening <span class="required">*</span></label>
+            <input class="input" placeholder="Nama rekening" />
+          </div>
+          <div class="form-field wide">
+            <label>cabang <span class="required">*</span></label>
+            <input class="input" placeholder="cabang" />
+          </div>
+          <div class="form-field wide">
+            <label>alamat <span class="required">*</span></label>
+            <input class="input" placeholder="alamat" />
+          </div>
+        </div>
+        <div class="modal-actions">
+          <button class="btn" id="saveRekening"><i data-lucide="save"></i>Save</button>
+        </div>
+      </div>
+    </div>
+    <div class="modal-backdrop" id="picModal" aria-hidden="true">
+      <div class="modal form-modal" role="dialog" aria-modal="true" aria-labelledby="picTitle">
+        <button class="modal-close" id="closePic" aria-label="Tutup">
+          <i data-lucide="x"></i>
+        </button>
+        <h2 id="picTitle">Tambah Data</h2>
+        <div class="tenant-form">
+          <div class="form-field wide">
+            <label>Kode Kawasan <span class="required">*</span></label>
+            <div class="search-select" data-value="Select value">
+              <button type="button" class="search-select-trigger"><span>Select value</span><i data-lucide="chevron-down"></i></button>
+              <div class="search-select-menu">
+                <input class="input search-select-input" aria-label="Cari kawasan" />
+                <div class="search-select-options">
+                  <button type="button" class="search-select-option">PT Surabaya Industrial Estate Rungkut</button>
+                  <button type="button" class="search-select-option">PIER Pasuruan</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-field wide">
+            <label>Nama <span class="required">*</span></label>
+            <input class="input" placeholder="Nama" />
+          </div>
+          <div class="form-field wide">
+            <label>Direktorat <span class="required">*</span></label>
+            <div class="search-select" data-value="Select value">
+              <button type="button" class="search-select-trigger"><span>Select value</span><i data-lucide="chevron-down"></i></button>
+              <div class="search-select-menu">
+                <input class="input search-select-input" aria-label="Cari direktorat" />
+                <div class="search-select-options">
+                  <button type="button" class="search-select-option">Keuangan</button>
+                  <button type="button" class="search-select-option">Operasional</button>
+                  <button type="button" class="search-select-option">Komersial</button>
+                  <button type="button" class="search-select-option">Legal</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-field wide">
+            <label>Jabatan <span class="required">*</span></label>
+            <input class="input" placeholder="jabatan" />
+          </div>
+          <div class="form-field wide">
+            <label>email <span class="required">*</span></label>
+            <input class="input" placeholder="email" />
+          </div>
+        </div>
+        <div class="modal-actions">
+          <button class="btn" id="savePic"><i data-lucide="save"></i>Save</button>
+        </div>
+      </div>
+    </div>
+    <div class="modal-backdrop" id="taxModal" aria-hidden="true">
+      <div class="modal form-modal" role="dialog" aria-modal="true" aria-labelledby="taxTitle">
+        <button class="modal-close" id="closeTax" aria-label="Tutup">
+          <i data-lucide="x"></i>
+        </button>
+        <h2 id="taxTitle">Tambah Data</h2>
+        <div class="tenant-form">
+          <div class="form-field wide">
+            <label>Kode Kawasan <span class="required">*</span></label>
+            <div class="search-select" data-value="Select value">
+              <button type="button" class="search-select-trigger"><span>Select value</span><i data-lucide="chevron-down"></i></button>
+              <div class="search-select-menu">
+                <input class="input search-select-input" aria-label="Cari kawasan" />
+                <div class="search-select-options">
+                  <button type="button" class="search-select-option">PT Surabaya Industrial Estate Rungkut</button>
+                  <button type="button" class="search-select-option">PIER Pasuruan</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-field wide">
+            <label>Keterangan <span class="required">*</span></label>
+            <input class="input" placeholder="keterangan" />
+          </div>
+          <div class="form-field wide">
+            <label>Nilai <span class="required">*</span></label>
+            <input class="input" placeholder="pastika untuk nilai koma diganti titik (2.5)" />
+          </div>
+        </div>
+        <div class="modal-actions">
+          <button class="btn" id="saveTax"><i data-lucide="save"></i>Save</button>
+        </div>
+      </div>
+    </div>
+    <div class="modal-backdrop" id="userModal" aria-hidden="true">
+      <div class="modal form-modal" role="dialog" aria-modal="true" aria-labelledby="userTitle">
+        <button class="modal-close" id="closeUser" aria-label="Tutup"><i data-lucide="x"></i></button>
+        <h2 id="userTitle">Tambah User</h2>
+        <div class="tenant-form">
+          <div class="form-field wide"><label>Nama <span class="required">*</span></label><input class="input" placeholder="Nama pengguna" /></div>
+          <div class="form-field wide"><label>Email <span class="required">*</span></label><input class="input" placeholder="email@sier.co.id" /></div>
+          <div class="form-field wide"><label>Password <span class="required">*</span></label><input class="input" type="password" placeholder="Password" /></div>
+          <div class="form-field wide">
+            <label>Role <span class="required">*</span></label>
+            <div class="search-select" data-value="Select value">
+              <button type="button" class="search-select-trigger"><span>Select value</span><i data-lucide="chevron-down"></i></button>
+              <div class="search-select-menu">
+                <input class="input search-select-input" aria-label="Cari role" />
+                <div class="search-select-options">
+                  <button type="button" class="search-select-option">Super Admin</button>
+                  <button type="button" class="search-select-option">Admin Keuangan</button>
+                  <button type="button" class="search-select-option">Admin Tenant</button>
+                  <button type="button" class="search-select-option">Viewer</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-field wide">
+            <label>Status <span class="required">*</span></label>
+            <div class="search-select" data-value="Aktif">
+              <button type="button" class="search-select-trigger"><span>Aktif</span><i data-lucide="chevron-down"></i></button>
+              <div class="search-select-menu">
+                <input class="input search-select-input" aria-label="Cari status" />
+                <div class="search-select-options">
+                  <button type="button" class="search-select-option">Aktif</button>
+                  <button type="button" class="search-select-option">Tidak Aktif</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-actions"><button class="btn" id="saveUser"><i data-lucide="save"></i>Save</button></div>
+      </div>
+    </div>
+    <div class="modal-backdrop" id="accessModal" aria-hidden="true">
+      <div class="modal form-modal" role="dialog" aria-modal="true" aria-labelledby="accessTitle">
+        <button class="modal-close" id="closeAccess" aria-label="Tutup"><i data-lucide="x"></i></button>
+        <h2 id="accessTitle">Tambah Hak Akses</h2>
+        <div class="tenant-form">
+          <div class="form-field wide"><label>Nama Hak Akses <span class="required">*</span></label><input class="input" placeholder="Contoh: Admin Keuangan" /></div>
+          <div class="form-field wide"><label>Keterangan <span class="required">*</span></label><input class="input" placeholder="Keterangan hak akses" /></div>
+          <div class="form-field wide"><label>Modul Akses <span class="required">*</span></label><input class="input" placeholder="Tenant, Kontrak, Keuangan" /></div>
+          <div class="form-field wide">
+            <label>Status <span class="required">*</span></label>
+            <div class="search-select" data-value="Aktif">
+              <button type="button" class="search-select-trigger"><span>Aktif</span><i data-lucide="chevron-down"></i></button>
+              <div class="search-select-menu">
+                <input class="input search-select-input" aria-label="Cari status" />
+                <div class="search-select-options">
+                  <button type="button" class="search-select-option">Aktif</button>
+                  <button type="button" class="search-select-option">Tidak Aktif</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-actions"><button class="btn" id="saveAccess"><i data-lucide="save"></i>Save</button></div>
+      </div>
+    </div>
+    <div class="modal-backdrop" id="profileModal" aria-hidden="true">
+      <div class="modal form-modal" role="dialog" aria-modal="true" aria-labelledby="profileTitle">
+        <button class="modal-close" id="closeProfile" aria-label="Tutup"><i data-lucide="x"></i></button>
+        <h2 id="profileTitle">Profil Saya</h2>
+        <div class="profile-summary">
+          <img class="avatar large" src="assets/user-avatar.png" alt="Foto profil Admin" />
+          <div>
+            <b>Admin</b>
+            <span>SIER Super Admin</span>
+            <small>admin@sier.co.id</small>
+          </div>
+        </div>
+        <div class="tenant-form user-config-form">
+          <div class="form-field wide"><label>Nama User <span class="required">*</span></label><input class="input" value="it_sier" /></div>
+          <div class="form-field wide"><label>Username User <span class="required">*</span></label><input class="input" value="it_sier" /></div>
+          <div class="form-field wide"><label>Email User <span class="required">*</span></label><input class="input" type="email" value="it_sier@gmail.com" /></div>
+          <div class="form-field wide"><label>Password Lama <span class="required">*</span></label><input class="input" type="password" placeholder="Password Lama..." /></div>
+          <div class="form-field wide"><label>Password Baru <span class="required">*</span></label><input class="input" type="password" placeholder="Password Baru..." /></div>
+        </div>
+        <div class="modal-actions"><button class="btn" id="saveProfile"><i data-lucide="save"></i>Save</button></div>
+      </div>
+    </div>
+    <div class="confirm-backdrop" id="confirmDialog" aria-hidden="true">
+      <div class="confirm-box" role="dialog" aria-modal="true" aria-labelledby="confirmTitle">
+        <div class="confirm-icon" id="confirmIcon"><i data-lucide="alert-triangle"></i></div>
+        <div>
+          <h2 id="confirmTitle">Konfirmasi Aksi</h2>
+          <p id="confirmMessage">Apakah Anda yakin ingin melanjutkan?</p>
+        </div>
+        <div class="confirm-actions">
+          <button class="btn outline" id="confirmCancel" type="button">Batal</button>
+          <button class="btn danger-btn" id="confirmOk" type="button">Ya, lanjutkan</button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
